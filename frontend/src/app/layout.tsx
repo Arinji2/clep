@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   title: "CLEP - Networked Clipboard Sharing",
   description:
     "Share clipboard text instantly with memorable short codes over the same wifi. No accounts, no apps, and links as short as a single letter.",
+  metadataBase: process.env.NEXT_PUBLIC_BASE_URL,
 };
 
 export default function RootLayout({
