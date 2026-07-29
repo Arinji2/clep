@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary: var(--on-primary);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-primary-fixed: var(--primary-fixed);
+  --color-primary-fixed-dim: var(--primary-fixed-dim);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary: var(--on-secondary);
+  --color-secondary-fixed: var(--secondary-fixed);
+
+  --color-error: var(--error);
+  --color-error-container: var(--error-container);
+  --color-on-error: var(--on-error);
+
+  --color-background: var(--background);
+  --color-on-background: var(--on-background);
+  --color-surface: var(--surface);
+  --color-on-surface: var(--on-surface);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-variant: var(--surface-variant);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+
+  --font-sans: var(--font-inter), sans-serif;
+}
+
+:root {
+  --primary: #3525cd;
+  --primary-container: #4f46e5;
+  --on-primary: #ffffff;
+  --on-primary-container: #dad7ff;
+  --primary-fixed: #e2dfff;
+  --primary-fixed-dim: #c3c0ff;
+
+  --secondary: #4648d4;
+  --secondary-container: #6063ee;
+  --on-secondary: #ffffff;
+  --secondary-fixed: #e1e0ff;
+
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+  --on-error: #ffffff;
+
+  --background: #faf9fa;
+  --on-background: #1a1c1d;
+  --surface: #faf9fa;
+  --on-surface: #1a1c1d;
+  --surface-dim: #dbdadb;
+  --surface-variant: #e3e2e3;
+  --on-surface-variant: #464555;
+
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f4f3f4;
+  --surface-container: #efedee;
+  --surface-container-high: #e9e8e9;
+  --surface-container-highest: #e3e2e3;
+
+  --outline: #777587;
+  --outline-variant: #c7c4d8;
+}
+
+.dark {
+  --primary: #818cf8;
+  --primary-container: #4f46e5;
+  --on-primary: #ffffff;
+  --on-primary-container: #e0e7ff;
+  --primary-fixed: #c7d2fe;
+  --primary-fixed-dim: #a5b4fc;
+
+  --secondary: #818cf8;
+  --secondary-container: #4f46e5;
+  --on-secondary: #ffffff;
+  --secondary-fixed: #c7d2fe;
+
+  --error: #ffb4ab;
+  --error-container: #93000a;
+  --on-error: #690005;
+
+  --background: #09090b;
+  --on-background: #fafafa;
+  --surface: #09090b;
+  --on-surface: #fafafa;
+  --surface-dim: #27272a;
+  --surface-variant: #3f3f46;
+  --on-surface-variant: #a1a1aa;
+
+  --surface-container-lowest: #18181b;
+  --surface-container-low: #27272a;
+  --surface-container: #3f3f46;
+  --surface-container-high: #52525b;
+  --surface-container-highest: #71717a;
+
+  --outline: #71717a;
+  --outline-variant: #3f3f46;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+/* Hide scrollbar for clean mobile swiping */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
