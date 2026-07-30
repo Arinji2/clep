@@ -1,3 +1,4 @@
+// frontend/src/app/clipboard.action.ts
 "use server";
 
 import { cookies, headers } from "next/headers";
@@ -8,7 +9,7 @@ const API_BASE =
   process.env.NEXT_PUBLIC_API_URL ||
   "http://localhost:8080/api";
 
-export async function getClientIpHeaders() {
+async function getClientIpHeaders() {
   const reqHeaders = await headers();
 
   const clientIp =
@@ -166,5 +167,20 @@ export async function getRandomCodeAction(): Promise<string> {
     return data.code;
   } catch {
     return Math.random().toString(36).substring(2, 6);
+  }
+}
+
+export async function getClientIpAction(): Promise<string> {
+  try {
+    const ipHeaders = await getClientIpHeaders();
+    const res = await fetch(`${API_BASE}/ip`, {
+      cache: "no-store",
+      headers: { ...ipHeaders },
+    });
+    if (!res.ok) return "Unknown Network";
+    const data = await res.json();
+    return data.ip;
+  } catch {
+    return "Unknown Network";
   }
 }
