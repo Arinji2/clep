@@ -8,7 +8,7 @@ const API_BASE =
   process.env.NEXT_PUBLIC_API_URL ||
   "http://localhost:8080/api";
 
-async function getClientIpHeaders() {
+export async function getClientIpHeaders() {
   const reqHeaders = await headers();
 
   const clientIp =
