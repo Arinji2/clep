@@ -1,4 +1,3 @@
-# backend/app/middleware.py
 import hashlib
 import ipaddress
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -7,26 +6,21 @@ from fastapi import Request
 def get_true_client_ip(request: Request) -> str:
     headers = request.headers
 
-    if cf_ip := headers.get("cf-connecting-ip"):
-        return cf_ip.split(",")[0].strip()
+    ip_headers = [
+        "x-clep-client-ip",       # 1. Custom header from Next.js server actions
+        "x-vercel-forwarded-for", # 2. Vercel's explicit forwarded header
+        "cf-connecting-ip",       # 3. Cloudflare
+        "true-client-ip",         # 4. Akamai/CF fallback
+        "x-forwarded-for",        # 5. Standard proxy
+        "x-real-ip"               # 6. Standard Nginx
+    ]
 
-    # 2. Vercel's explicit forwarded header
-    if vercel_ip := headers.get("x-vercel-forwarded-for"):
-        return vercel_ip.split(",")[0].strip()
+    for header in ip_headers:
+        if value := headers.get(header):
+            ip = value.split(",")[0].strip()
+            if ip:
+                return ip
 
-    # 3. True-Client-IP (Akamai/CF fallback)
-    if true_client := headers.get("true-client-ip"):
-        return true_client.split(",")[0].strip()
-
-    # 4. Standard X-Forwarded-For (Left-most is original client)
-    if xff := headers.get("x-forwarded-for"):
-        return xff.split(",")[0].strip()
-
-    # 5. X-Real-IP (Standard Nginx/Proxy)
-    if x_real_ip := headers.get("x-real-ip"):
-        return x_real_ip.split(",")[0].strip()
-
-    # 6. Fallback to raw socket host
     return request.client.host if request.client else "127.0.0.1"
 
 def compute_network_hash(ip_str: str) -> str:
