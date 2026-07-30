@@ -40,6 +40,21 @@ app.add_middleware(
 # Custom Network Middleware
 app.add_middleware(NetworkMiddleware)
 
+@app.get("/health")
+async def health_check():
+    try:
+        db = await get_db()
+        try:
+            await db.execute("SELECT 1")
+            return {"status": "healthy", "database": "connected"}
+        finally:
+            await db.close()
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Database connection failed: {str(e)}"
+        )
+
 @app.get("/api/ip", response_model=IpResponse)
 async def get_ip(request: Request):
     return IpResponse(ip=getattr(request.state, "client_ip", "Unknown Network"))
