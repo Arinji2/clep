@@ -11,12 +11,18 @@ const API_BASE =
 
 async function getClientIpHeaders() {
   const reqHeaders = await headers();
+
+  const clientIp =
+    reqHeaders.get("x-vercel-forwarded-for") ||
+    reqHeaders.get("cf-connecting-ip") ||
+    (reqHeaders.get("x-forwarded-for") || "").split(",")[0] ||
+    reqHeaders.get("true-client-ip") ||
+    reqHeaders.get("x-real-ip") ||
+    "";
+
   return {
-    "cf-connecting-ip": reqHeaders.get("cf-connecting-ip") || "",
-    "x-vercel-forwarded-for": reqHeaders.get("x-vercel-forwarded-for") || "",
-    "x-forwarded-for": reqHeaders.get("x-forwarded-for") || "",
-    "true-client-ip": reqHeaders.get("true-client-ip") || "",
-    "x-real-ip": reqHeaders.get("x-real-ip") || "",
+    // Send ip via a custom header so Vercel's outgoing NAT proxy doesn't strip it
+    "x-clep-client-ip": clientIp.trim(),
   };
 }
 
@@ -161,20 +167,5 @@ export async function getRandomCodeAction(): Promise<string> {
     return data.code;
   } catch {
     return Math.random().toString(36).substring(2, 6);
-  }
-}
-
-export async function getClientIpAction(): Promise<string> {
-  try {
-    const ipHeaders = await getClientIpHeaders();
-    const res = await fetch(`${API_BASE}/ip`, {
-      cache: "no-store",
-      headers: { ...ipHeaders },
-    });
-    if (!res.ok) return "Unknown Network";
-    const data = await res.json();
-    return data.ip;
-  } catch {
-    return "Unknown Network";
   }
 }
