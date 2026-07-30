@@ -1,4 +1,3 @@
-// frontend/src/app/clipboard.action.ts
 "use server";
 
 import { cookies, headers } from "next/headers";
