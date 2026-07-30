@@ -162,7 +162,7 @@ export default function ClipboardSlugPage({
               </div>
 
               {timeLeft && (
-                <div className="inline-flex items-center gap-1 rounded-full border border-primary/20 bg-primary-container/10 px-2.5 py-1 font-semibold text-[10px] text-primary md:gap-1.5 md:px-4 md:py-1.5 md:text-xs">
+                <div className="inline-flex items-center gap-1 rounded-full border border-primary/20 bg-primary-container/10 px-2.5 py-1 font-semibold text-[10px] text-primary md:w-35 md:gap-1.5 md:px-4 md:py-1.5 md:text-xs">
                   <span className="material-symbols-outlined text-[14px] md:text-[16px]">
                     schedule
                   </span>
