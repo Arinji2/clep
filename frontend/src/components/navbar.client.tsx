@@ -10,9 +10,9 @@ export function Navbar() {
       <div className="mx-auto flex w-full max-w-300 items-center justify-between px-4 py-3 md:px-6 md:py-4">
         <Link
           href="/"
-          className="font-black text-2xl text-primary tracking-tighter transition-opacity hover:opacity-80 md:text-8xl"
+          className="font-black text-2xl text-primary tracking-tighter transition-opacity hover:opacity-80 md:text-4xl"
         >
-          C
+          CLEP
         </Link>
         <button
           type="button"
