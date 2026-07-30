@@ -99,7 +99,7 @@ export default function Home() {
                 <span className="material-symbols-outlined mr-2 shrink-0 text-[14px] text-outline md:text-[16px]">
                   lock
                 </span>
-                <span className="truncate font-mono text-on-surface-variant text-xs md:text-sm">
+                <span className="truncate font-mono text-on-surface-variant text-xs">
                   clep.arinji.com/
                 </span>
                 <span className="font-bold font-mono text-primary text-xs md:text-sm">
