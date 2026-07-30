@@ -50,8 +50,15 @@ export default function ClipboardSlugPage({
 
   useEffect(() => {
     if (!data?.expires_at) return;
+
     function updateTimer() {
-      const expires = new Date(data!.expires_at).getTime();
+      // Ensure JavaScript parses the DB string as UTC by adding 'Z'
+      const rawDate = data!.expires_at;
+      const isoDate = rawDate.endsWith("Z")
+        ? rawDate
+        : `${rawDate.replace(" ", "T")}Z`;
+
+      const expires = new Date(isoDate).getTime();
       const now = Date.now();
       const diff = expires - now;
 
@@ -251,7 +258,7 @@ export default function ClipboardSlugPage({
                   type="button"
                   onClick={handleSave}
                   disabled={saveState === "saving" || content === data.content}
-                  className={`flex h-12 flex-1 items-center justify-center gap-1 rounded-full py-4 py-4 font-semibold text-sm shadow-sm transition-all md:h-14 md:gap-2 md:text-base ${
+                  className={`flex h-12 flex-1 items-center justify-center gap-1 rounded-full py-4 font-semibold text-sm shadow-sm transition-all md:h-14 md:gap-2 md:text-base ${
                     saveState === "saved"
                       ? "bg-green-600 text-white"
                       : content !== data.content
